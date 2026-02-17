@@ -1,5 +1,7 @@
+from location import Location
+
 class ProcessingPlant:
-    def __init__(self, id, plant_type, location, pollution_limit):
+    def __init__(self, id: str, plant_type: str, location: Location, pollution_limit: int):
         self.id = id
         self.type = plant_type
         self.location = location
