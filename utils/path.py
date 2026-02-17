@@ -1,0 +1,6 @@
+BIN_DATA = "/data/bins.json"
+LOCATION_DATA = "/data/locations.json"
+VEHICLE_DATA = "/data/vehivcles.json"
+PROCESSING_PLANT_DATA = "/data/plants/processing_plants.json"
+SEGREGATION_PLANT_DATA = "/data/plants/segregation_plants.json"
+WASTE_DATA = "/data/wastes.json"

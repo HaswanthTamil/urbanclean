@@ -1,0 +1,47 @@
+[
+    {
+        "id": "WASTE-17022026-10234",
+        "waste_type": "bio-degradable",
+        "volume": 120.5
+    },
+    {
+        "id": "WASTE-17022026-20451",
+        "waste_type": "bio-degradable",
+        "volume": 95.2
+    },
+    {
+        "id": "WASTE-17022026-30987",
+        "waste_type": "recyclable",
+        "volume": 60.0
+    },
+    {
+        "id": "WASTE-17022026-41762",
+        "waste_type": "metal",
+        "volume": 18.4
+    },
+    {
+        "id": "WASTE-17022026-52890",
+        "waste_type": "inert",
+        "volume": 150.7
+    },
+    {
+        "id": "WASTE-17022026-63921",
+        "waste_type": "e-waste",
+        "volume": 6.8
+    },
+    {
+        "id": "WASTE-17022026-74813",
+        "waste_type": "medical",
+        "volume": 9.5
+    },
+    {
+        "id": "WASTE-17022026-85942",
+        "waste_type": "unclassified",
+        "volume": 22.3
+    },
+    {
+        "id": "WASTE-17022026-96370",
+        "waste_type": "other",
+        "volume": 11.0
+    }
+]
