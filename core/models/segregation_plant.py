@@ -9,3 +9,4 @@ class SegregationPlant:
         self.available_capacity = max_capacity
         self.accuracy = accuracy
         self.is_operational = True
+    

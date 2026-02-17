@@ -1,4 +1,5 @@
 from location import Location
+from 
 
 class ProcessingPlant:
     def __init__(self, id: str, plant_type: str, location: Location, pollution_limit: int):
@@ -8,3 +9,10 @@ class ProcessingPlant:
         self.pollution_limit = pollution_limit
         self.current_pollution = 0
         self.is_operational = True
+
+    def output_towards_destination(waste_type :str):
+        
+
+
+
+
