@@ -1,5 +1,6 @@
 import json
 import os
+from core.models.waste import Waste
 
 
 def load_json(path: str) -> list: # type: ignore
@@ -66,3 +67,20 @@ def add_to_json(new_entry: dict, path: str) -> None: # type: ignore
 
     with open(path, "w") as file:
         json.dump(data, file, indent=4)
+
+
+def findWaste(waste_id: str, json_path: str) -> Waste:
+    with open(json_path, "r") as file:
+        data = json.load(file)
+
+    for item in data:
+        if item["id"] == waste_id:
+            waste = Waste(
+                waste_type=item["waste_type"],
+                id=item["id"],
+                volume=item["volume"]
+            )
+            waste.pollution = item.get("pollution", 0)
+            return waste
+
+    raise ValueError(f"Waste with ID '{waste_id}' not found.")
