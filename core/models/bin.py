@@ -1,8 +1,7 @@
-from location import Location
 
 
 class Bin:
-    def __init__(self, id: str, location_id: sttr, max_capacity: float, waste_type: list[str], priority: int = 0):
+    def __init__(self, id: str, location_id: str, max_capacity: float, waste_type: list[str], priority: int = 0):
         self.id = id
         self.location_id = location_id
         self.max_capacity = max_capacity

@@ -6,14 +6,14 @@ class Location:
         self.lon = lon
         self.location_type = location_type
 
-    def toDict(self) -> dict: 
+    def toDict(self) -> dict:  # type: ignore
         return {
             "id": self.id,
             "name": self.name,
             "lat": self.lat,
             "lon": self.lon,
             "location_type": self.location_type
-        }
+        } # type: ignore
 
 # emergency
 # populated
