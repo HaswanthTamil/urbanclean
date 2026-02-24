@@ -7,7 +7,8 @@ PREFIX_MAP = {
     "seg_plant": "SEG-PLANT",
     "proc_plant": "PROC-PLANT",
     "truck": "TRUCK",
-    "bin": "BIN"
+    "bin": "BIN",
+    "location": "LOC"
 }
 
 
