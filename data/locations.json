@@ -1,0 +1,177 @@
+[
+  {
+    "id": "LOC-24022026-48291",
+    "name": "Apollo Hospital Greams Road",
+    "lat": 13.0622,
+    "lon": 80.2518,
+    "location_type": "emergency"
+  },
+  {
+    "id": "LOC-24022026-73915",
+    "name": "Rajiv Gandhi Government General Hospital",
+    "lat": 13.0796,
+    "lon": 80.2752,
+    "location_type": "emergency"
+  },
+  {
+    "id": "LOC-24022026-15842",
+    "name": "Tidel Park Taramani",
+    "lat": 12.9896,
+    "lon": 80.2472,
+    "location_type": "private-corp"
+  },
+  {
+    "id": "LOC-24022026-96427",
+    "name": "Phoenix Marketcity Velachery",
+    "lat": 12.9916,
+    "lon": 80.2177,
+    "location_type": "urban-loc"
+  },
+  {
+    "id": "LOC-24022026-30561",
+    "name": "Chennai Central Railway Station",
+    "lat": 13.0827,
+    "lon": 80.2757,
+    "location_type": "govt-building"
+  },
+  {
+    "id": "LOC-24022026-88734",
+    "name": "Koyambedu Bus Terminus (CMBT)",
+    "lat": 13.0695,
+    "lon": 80.2085,
+    "location_type": "govt-building"
+  },
+  {
+    "id": "LOC-24022026-41258",
+    "name": "Marina Beach",
+    "lat": 13.0500,
+    "lon": 80.2824,
+    "location_type": "tourist"
+  },
+  {
+    "id": "LOC-24022026-67902",
+    "name": "Besant Nagar Beach",
+    "lat": 13.0003,
+    "lon": 80.2665,
+    "location_type": "tourist"
+  },
+  {
+    "id": "LOC-24022026-22394",
+    "name": "Adyar Residential Zone",
+    "lat": 13.0067,
+    "lon": 80.2570,
+    "location_type": "urban-loc"
+  },
+  {
+    "id": "LOC-24022026-55671",
+    "name": "Anna Nagar Residential Area",
+    "lat": 13.0850,
+    "lon": 80.2101,
+    "location_type": "urban-loc"
+  },
+  {
+    "id": "LOC-24022026-74183",
+    "name": "T Nagar Commercial Hub",
+    "lat": 13.0418,
+    "lon": 80.2341,
+    "location_type": "commercial"
+  },
+  {
+    "id": "LOC-24022026-19263",
+    "name": "Velachery Residential Area",
+    "lat": 12.9759,
+    "lon": 80.2212,
+    "location_type": "urban-loc"
+  },
+  {
+    "id": "LOC-24022026-86420",
+    "name": "Guindy Industrial Estate",
+    "lat": 13.0106,
+    "lon": 80.2209,
+    "location_type": "industry"
+  },
+  {
+    "id": "LOC-24022026-33109",
+    "name": "Perungudi IT Corridor",
+    "lat": 12.9655,
+    "lon": 80.2456,
+    "location_type": "commercial"
+  },
+  {
+    "id": "LOC-24022026-90544",
+    "name": "Tambaram Bus Stand",
+    "lat": 12.9249,
+    "lon": 80.1000,
+    "location_type": "govt-building"
+  },
+  {
+    "id": "LOC-24022026-11875",
+    "name": "Chromepet Residential Zone",
+    "lat": 12.9516,
+    "lon": 80.1446,
+    "location_type": "urban-loc"
+  },
+  {
+    "id": "LOC-24022026-60231",
+    "name": "Royapuram Fishing Harbour",
+    "lat": 13.1135,
+    "lon": 80.2950,
+    "location_type": "populated"
+  },
+  {
+    "id": "LOC-24022026-44792",
+    "name": "Mylapore Kapaleeshwarar Temple Area",
+    "lat": 13.0339,
+    "lon": 80.2696,
+    "location_type": "populated"
+  },
+  {
+    "id": "LOC-24022026-78126",
+    "name": "OMR Sholinganallur Junction",
+    "lat": 12.9003,
+    "lon": 80.2279,
+    "location_type": "commercial"
+  },
+  {
+    "id": "LOC-24022026-25980",
+    "name": "Madras High Court Complex",
+    "lat": 13.0878,
+    "lon": 80.2837,
+    "location_type": "govt-building"
+  },
+  {
+    "id": "LOC-24022026-67453",
+    "name": "Saidapet Residential Area",
+    "lat": 13.0213,
+    "lon": 80.2205,
+    "location_type": "populated"
+  },
+  {
+    "id": "LOC-24022026-39218",
+    "name": "Egmore Railway Station",
+    "lat": 13.0732,
+    "lon": 80.2618,
+    "location_type": "govt-building"
+  },
+  {
+    "id": "LOC-24022026-84067",
+    "name": "Porur Junction",
+    "lat": 13.0381,
+    "lon": 80.1565,
+    "location_type": "populated"
+  },
+  {
+    "id": "LOC-24022026-51734",
+    "name": "Nungambakkam Commercial Area",
+    "lat": 13.0604,
+    "lon": 80.2422,
+    "location_type": "commercial"
+  },
+  {
+    "id": "LOC-24022026-96311",
+    "name": "Perambur Residential Zone",
+    "lat": 13.1210,
+    "lon": 80.2326,
+    "location_type": "populated"
+  }
+]

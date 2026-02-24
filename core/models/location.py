@@ -14,3 +14,13 @@ class Location:
             "lon": self.lon,
             "location_type": self.location_type
         }
+
+# emergency
+# populated
+# tourist
+# school
+# urban-locality
+# govt-building
+# private-corp
+# industry
+# commercial
