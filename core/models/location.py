@@ -5,3 +5,12 @@ class Location:
         self.lat = lat
         self.lon = lon
         self.location_type = location_type
+
+    def toDict(self) -> dict: 
+        return {
+            "id": self.id,
+            "name": self.name,
+            "lat": self.lat,
+            "lon": self.lon,
+            "location_type": self.location_type
+        }

@@ -15,15 +15,15 @@ class SegregationPlant:
         self.is_operational = True
 
 
-    def dump(self, waste: Waste):
+    # def dump(self, waste: Waste):
 
-        if self.available_capacity < waste.volume:
-            print("Plant capacity exceeded. Dumping failed")
-            return
-        else:
-            self.available_capacity -= waste.volume
-            remove_from_json(waste.id, WASTE_DATA)
-            del waste
+    #     if self.available_capacity < waste.volume:
+    #         print("Plant capacity exceeded. Dumping failed")
+    #         return
+    #     else:
+    #         self.available_capacity -= waste.volume
+    #         remove_from_json(waste.id, WASTE_DATA)
+    #         del waste
 
 
     def segregate(self) -> list[Waste]:

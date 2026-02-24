@@ -9,3 +9,7 @@ class Bin:
         self.current_capacity = max_capacity
         self.waste_type = waste_type
         self.priority = priority
+    
+    def empty(self):
+        self.current_capacity = self.max_capacity
+        return
