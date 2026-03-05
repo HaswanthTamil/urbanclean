@@ -1,0 +1,3 @@
+# Map Config
+
+ROAD_CLUSTERING_FACTOR = 0.87
