@@ -3,10 +3,10 @@ import os
 from core.models.waste import Waste
 
 
-def load_json(path: str) -> list: # type: ignore
+def load_json(path: str) -> list[object]: 
     
     if not os.path.exists(path):
-        return [] # type: ignore
+        return [] 
 
     try:
         with open(path, "r") as file:
@@ -14,10 +14,10 @@ def load_json(path: str) -> list: # type: ignore
             return data
     except:
         # File exists but is empty or corrupted
-        return [] # type: ignore
+        return [] 
 
 
-def save_json(path: str, data): # type: ignore
+def save_json(path: str, data: object):
     with open(path, "w") as file:
         json.dump(data, file, indent=4)
 
@@ -33,8 +33,7 @@ def remove_from_json(target_id: str, path: str) -> bool:
         if not isinstance(data, list):
             raise ValueError("JSON structure must be a list of objects")
 
-        original_length = len(data) # type: ignore
-
+        original_length = len(data) # type:ignore
         data = [item for item in data if item.get("id") != target_id] # type: ignore
 
         if len(data) == original_length: # type: ignore

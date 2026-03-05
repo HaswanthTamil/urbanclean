@@ -1,61 +1,46 @@
-from models.bin import Bin
-from utils.storage import *
-from utils.path import *
-'''10.emergency
- highly populated/slums
- commercial area
-tourists spots
- schools/colleges 
-urban locality
-govt buildings
-private companies
-industry
+from utils.storage import load_json, save_json
+from utils.path import LOCATION_DATA, RAW_BIN_DATA, PRIORITY_BIN_DATA
+from models.location import Location
 
-'''
+PRIORITY_MAP = {
+    "emergency": 10,
+    "populated": 9,
+    "commercial": 8,
+    "tourist": 7,
+    "school": 6,
+    "urban-loc": 5,
+    "govt-building": 4,
+    "private-corp": 3,
+    "industry": 2
+}
 
-'''import data from json'''
-'''raw bin-load->compare loc.id->compare with location type->assign pripority->priority bins'''
-datarawbin = []
-datalocation = []
-datafinal = []
 
-load_json(LOCATION_DATA, datalocation)
-load_json(RAW_BIN_DATA, datarawbin)
+def generate_priority_bins():
+    raw_bins: list[object] = load_json(RAW_BIN_DATA) 
+    locations: list[object] = load_json(LOCATION_DATA) 
 
-for bin in datarawbin:
-    for location in datalocation:
-        if bin["location_id"] == location["id"]:
+    location_map: dict[str, Location] = {loc["id"]: loc for loc in locations} # type: ignore
 
-            if location["location_type"] == "emergency":
-                bin["priority"] = 10
+    priority_bins: list[dict] = [] 
 
-            elif location["location_type"] == "populated":
-                bin["priority"] = 9
+    for bin_data in raw_bins: 
+        location: Location = location_map.get(bin_data["location_id"]) # type: ignore
 
-            elif location["location_type"] == "commercial":
-                bin["priority"] = 8
+        if not location:
+            continue  # skip invalid mapping safely
 
-            elif location["location_type"] == "tourist":
-                bin["priority"] = 7
+        location_type = location.location_type
+        priority = PRIORITY_MAP.get(location_type, 1)
 
-            elif location["location_type"] == "school":
-                bin["priority"] = 6
+        # create new dict (avoid mutating original)
+        updated_bin: dict = { 
+            **bin_data, # type: ignore
+            "priority": priority
+        }
 
-            elif location["location_type"] == "urban-loc":
-                bin["priority"] = 5
+        priority_bins.append(updated_bin)
 
-            elif location["location_type"] == "govt-building":
-                bin["priority"] = 4
+    # sort high → low priority
+    priority_bins.sort(key=lambda x: x["priority"], reverse=True) 
 
-            elif location["location_type"] == "private-corp":
-                bin["priority"] = 3
-
-            else:
-                bin["priority"] = 1   # default priority
-
-            datafinal.append(bin)
-datafinal.sort(key=lambda x: x["priority"], reverse=True)
-save_json(PRIORITY_BIN_DATA,datafinal)   
- 
-                            
-                        
+    save_json(PRIORITY_BIN_DATA, priority_bins) 
