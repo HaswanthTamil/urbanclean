@@ -3,46 +3,183 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Urban Clean Dashboard</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f5f5f5;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      h1 {
-        color: #333;
-        text-align: center;
-      }
-      .nav {
-        text-align: center;
-        margin: 20px 0;
-      }
-      .nav a {
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 0 10px;
-        background-color: #4caf50;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-      }
-      .nav a:hover {
-        background-color: #45a049;
-      }
-    </style>
+    <title>Urban Clean | Dashboard</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
   </head>
   <body>
-    <div class="container">
-      <h1>Urban Clean Management System</h1>
-      <div class="nav">
-        <a href="/map">View Map</a>
-      </div>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="brand">
+          <i class="fas fa-leaf"></i>
+          <span>Urban Clean</span>
+        </div>
+        <nav class="nav-menu">
+          <li class="nav-item">
+            <a href="/" class="nav-link active">
+              <i class="fas fa-chart-pie"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/map" class="nav-link">
+              <i class="fas fa-map-marked-alt"></i>
+              <span>Live Map</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-truck"></i>
+              <span>Fleet Status</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-industry"></i>
+              <span>Plants</span>
+            </a>
+          </li>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="#" class="nav-link">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <div>
+            <h1 style="color: var(--text-main); font-size: 1.875rem;">Command Center</h1>
+            <p style="color: var(--text-muted);">Real-time waste management optimization</p>
+          </div>
+          <div class="status-indicator glass-card" style="padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span class="dot dot-green"></span>
+            <span style="font-size: 0.875rem; font-weight: 600;">System Online</span>
+          </div>
+        </header>
+
+        <section class="stats-grid">
+          <div class="glass-card">
+            <div class="card-title">
+              Active Bins
+              <i class="fas fa-trash-alt" style="color: var(--primary);"></i>
+            </div>
+            <div class="card-value" id="stat-bins">124</div>
+            <div class="card-trend trend-up">
+              <i class="fas fa-arrow-up"></i> 12% from yesterday
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="card-title">
+              Trucks on Route
+              <i class="fas fa-truck-moving" style="color: var(--secondary);"></i>
+            </div>
+            <div class="card-value" id="stat-trucks">18</div>
+            <div class="card-trend" style="color: var(--text-muted);">
+              82% capacity utilized
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="card-title">
+              Waste Processed
+              <i class="fas fa-recycle" style="color: var(--accent);"></i>
+            </div>
+            <div class="card-value" id="stat-waste">4.2 <span style="font-size: 1rem;">tons</span></div>
+            <div class="card-trend trend-up">
+              <i class="fas fa-check-circle"></i> Optimizing throughput
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="card-title">
+              Pending Alerts
+              <i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i>
+            </div>
+            <div class="card-value" id="stat-alerts">3</div>
+            <div class="card-trend trend-down">
+              Requires attention
+            </div>
+          </div>
+        </section>
+
+        <section style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div class="glass-card" style="padding: 0;">
+            <div style="padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="font-size: 1.125rem;">Live Collection Overview</h3>
+              <a href="/map" style="color: var(--primary); text-decoration: none; font-size: 0.875rem; font-weight: 600;">Full Map View</a>
+            </div>
+            <div id="mini-map" style="height: 400px; background: rgba(0,0,0,0.2); border-bottom-left-radius: 1.25rem; border-bottom-right-radius: 1.25rem;">
+                <!-- Mini map will be rendered here -->
+                <svg id="map-svg" style="width: 100%; height: 100%;"></svg>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3 style="font-size: 1.125rem; margin-bottom: 1.5rem;">Priority List</h3>
+            <div class="priority-list" id="priority-list">
+              <!-- Dynamically populated -->
+              <div style="padding: 1rem; background: var(--glass-bg); border-radius: 0.75rem; margin-bottom: 0.75rem; border-left: 4px solid var(--danger);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                  <span style="font-weight: 600; font-size: 0.875rem;">Apollo Hospital</span>
+                  <span style="color: var(--danger); font-size: 0.75rem; font-weight: 700;">CRITICAL</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Fill Level: 92% • ETA: 12 mins</div>
+              </div>
+              <div style="padding: 1rem; background: var(--glass-bg); border-radius: 0.75rem; margin-bottom: 0.75rem; border-left: 4px solid var(--accent);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                  <span style="font-weight: 600; font-size: 0.875rem;">Phoenix Marketcity</span>
+                  <span style="color: var(--accent); font-size: 0.75rem; font-weight: 700;">HIGH</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Fill Level: 84% • ETA: 24 mins</div>
+              </div>
+            </div>
+            <a href="/dashboard" class="control-btn secondary" style="display: block; text-align: center; text-decoration: none; margin-top: 1rem;">View All Assets</a>
+          </div>
+        </section>
+
+        <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="glass-card">
+                <h3 style="font-size: 1.125rem; margin-bottom: 1rem;">Fleet Overview</h3>
+                <div id="fleet-status" style="max-height: 200px; overflow-y: auto;">
+                    <!-- Summary table populated by JS -->
+                </div>
+            </div>
+            <div class="glass-card">
+                <h3 style="font-size: 1.125rem; margin-bottom: 1rem;">Processing Status</h3>
+                <div id="plants-status" style="max-height: 200px; overflow-y: auto;">
+                    <!-- Summary table populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section class="manual-controls">
+            <div class="glass-card">
+                <h3 style="font-size: 1.125rem; margin-bottom: 1rem;">Quick Actions</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                    <button class="control-btn" onclick="simulateCheckup()">Mark for Checkup</button>
+                    <button class="control-btn secondary" onclick="rerouteTrucks()">Dispatch Extra Truck</button>
+                    <button class="control-btn secondary" style="grid-column: span 2; border-color: var(--danger); color: var(--danger);" onclick="raisePenalty()">Raise Environmental Penalty</button>
+                </div>
+            </div>
+            <div class="glass-card">
+                <h3 style="font-size: 1.125rem; margin-bottom: 1rem;">System Logs</h3>
+                <div id="logs" style="font-family: monospace; font-size: 0.75rem; color: var(--text-muted); height: 110px; overflow-y: auto;">
+                    [09:15:22] BIN-48211 marked as Priority (Emergency)<br>
+                    [09:18:45] TRUCK-002 dispatched to Route 4<br>
+                    [09:20:10] SEED plants optimization algorithm updated
+                </div>
+            </div>
+        </section>
+      </main>
     </div>
+    
+    <script src="/static/js/map.js"></script>
+    <script src="/static/js/dashboard.js"></script>
   </body>
 </html>

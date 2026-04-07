@@ -100,6 +100,10 @@ def index():
 def map_view():
     return render_template('map.html')
 
+@app.route('/dashboard')
+def dashboard_view():
+    return render_template('dashboard.html')
+
 @app.route('/api/map-data')
 def map_data():
     if map_graph is None:
@@ -137,6 +141,46 @@ def map_data():
         'nodes': nodes,
         'edges': edges
     })
+
+@app.route('/api/bins-stats')
+def bins_stats():
+    bins_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'raw_bins.json')
+    bins = load_json(bins_path)
+    # Simulate current capacity if not present
+    for b in bins:
+        if 'current_capacity' not in b:
+            b['current_percentage'] = 40 + (hash(b['id']) % 50) # Random but consistent for the session
+        else:
+            b['current_percentage'] = (b['current_capacity'] / b['max_capacity']) * 100
+    return jsonify(bins)
+
+@app.route('/api/vehicles-stats')
+def vehicles_stats():
+    # Since vehicles.json is empty in the current state, we'll return some mock data
+    # that follows the logic of the project
+    mock_vehicles = [
+        {"id": "TRUCK-001", "type": "bio-degradable", "capacity": 500, "available": 320, "status": "active", "route": "Route 1"},
+        {"id": "TRUCK-002", "type": "recyclable", "capacity": 400, "available": 150, "status": "active", "route": "Route 4"},
+        {"id": "TRUCK-003", "type": "hazardous", "capacity": 200, "available": 200, "status": "idle", "route": "Standby"},
+        {"id": "TRUCK-004", "type": "e-waste", "capacity": 300, "available": 50, "status": "returning", "route": "Route 2"}
+    ]
+    return jsonify(mock_vehicles)
+
+@app.route('/api/plants-stats')
+def plants_stats():
+    # plants/processing_plants.json and segregation_plants.json are also empty
+    mock_plants = {
+        "segregation": [
+            {"id": "SEG-01", "name": "North Segregation Plant", "capacity": 2000, "usage": 1450, "accuracy": 94, "status": "working"},
+            {"id": "SEG-02", "name": "South Segregation Plant", "capacity": 1500, "usage": 1200, "accuracy": 91, "status": "working"}
+        ],
+        "processing": [
+            {"id": "PROC-BIO-01", "type": "composting", "capacity": 500, "usage": 420, "pollution": 0.02, "status": "working"},
+            {"id": "PROC-REC-01", "type": "recycling", "capacity": 800, "usage": 550, "pollution": 0.05, "status": "working"},
+            {"id": "PROC-HAZ-01", "type": "hazardous", "capacity": 100, "usage": 20, "pollution": 0.12, "status": "maintenance"}
+        ]
+    }
+    return jsonify(mock_plants)
 
 if __name__ == '__main__':
     generate_map()
