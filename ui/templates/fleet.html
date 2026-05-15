@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urban Clean | Fleet Status</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="brand">
+          <i class="fas fa-leaf"></i>
+          <span>Urban Clean</span>
+        </div>
+        <nav class="nav-menu">
+          <li class="nav-item"><a href="/" class="nav-link"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a></li>
+          <li class="nav-item"><a href="/map" class="nav-link"><i class="fas fa-map-marked-alt"></i><span>Live Map</span></a></li>
+          <li class="nav-item"><a href="/input" class="nav-link"><i class="fas fa-plus-circle"></i><span>Add Waste</span></a></li>
+          <li class="nav-item"><a href="/fleet" class="nav-link active"><i class="fas fa-truck"></i><span>Fleet Status</span></a></li>
+          <li class="nav-item"><a href="/plants" class="nav-link"><i class="fas fa-industry"></i><span>Plants</span></a></li>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header style="margin-bottom: 2rem;">
+            <h1 style="color: var(--text-main); font-size: 1.875rem;">Fleet Administration</h1>
+            <p style="color: var(--text-muted);">Real-time dispatch and logistics tracking</p>
+        </header>
+
+        <section class="glass-card">
+          <h3 style="margin-bottom: 1.5rem;">Active Vehicle Roster</h3>
+          <div id="fleet-container">Loading...</div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      async function loadFleet() {
+        const res = await fetch('/api/vehicles-stats');
+        const trucks = await res.json();
+        
+        let html = `<table style="width: 100%; border-collapse: collapse; text-align:left;">
+          <tr style="border-bottom: 1px solid var(--border); color: var(--text-muted);">
+            <th style="padding: 1rem;">Vehicle ID</th><th>Waste Compatibility</th><th>Payload</th><th>Current Route / Order</th><th>Status</th>
+          </tr>`;
+          
+        trucks.forEach(t => {
+          let perc = ((t.capacity - t.available) / t.capacity) * 100;
+          let dot = t.status === 'en-route' ? 'dot-red' : 'dot-green';
+          html += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 1rem;"><strong>${t.id}</strong></td>
+            <td style="text-transform: capitalize;">${t.type}</td>
+            <td>
+              <div style="width: 100px; height: 6px; background: rgba(0,0,0,0.3); border-radius: 3px; display: inline-block;">
+                <div style="width: ${perc}%; height: 100%; background: var(--primary); border-radius: 3px;"></div>
+              </div> ${perc.toFixed(0)}%
+            </td>
+            <td style="color: var(--accent); font-weight: 500;">${t.route}</td>
+            <td><span class="dot ${dot}"></span> ${t.status.toUpperCase()}</td>
+          </tr>`;
+        });
+        document.getElementById('fleet-container').innerHTML = html + "</table>";
+      }
+      setInterval(loadFleet, 2000);
+      loadFleet();
+    </script>
+  </body>
+</html>

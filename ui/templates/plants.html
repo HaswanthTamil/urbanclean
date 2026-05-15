@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urban Clean | Facilities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="brand">
+          <i class="fas fa-leaf"></i>
+          <span>Urban Clean</span>
+        </div>
+        <nav class="nav-menu">
+          <li class="nav-item"><a href="/" class="nav-link"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a></li>
+          <li class="nav-item"><a href="/map" class="nav-link"><i class="fas fa-map-marked-alt"></i><span>Live Map</span></a></li>
+          <li class="nav-item"><a href="/input" class="nav-link"><i class="fas fa-plus-circle"></i><span>Add Waste</span></a></li>
+          <li class="nav-item"><a href="/fleet" class="nav-link"><i class="fas fa-truck"></i><span>Fleet Status</span></a></li>
+          <li class="nav-item"><a href="/plants" class="nav-link active"><i class="fas fa-industry"></i><span>Plants</span></a></li>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header style="margin-bottom: 2rem;">
+            <h1 style="color: var(--text-main); font-size: 1.875rem;">Plant Facilities</h1>
+            <p style="color: var(--text-muted);">Segregation and Processing centers overview</p>
+        </header>
+
+        <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <div class="glass-card">
+            <h3 style="margin-bottom: 1.5rem; color: var(--accent);">Segregation Plants</h3>
+            <div id="seg-container"></div>
+          </div>
+          <div class="glass-card">
+            <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Processing Facilities</h3>
+            <div id="proc-container"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      async function loadPlants() {
+        const res = await fetch('/api/plants-stats');
+        const data = await res.json();
+        
+        const renderCards = (plants, type) => plants.map(p => `
+          <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong>${p.name}</strong> 
+              <span class="dot ${p.status === 'working' ? 'dot-green' : 'dot-amber'}"></span>
+            </div>
+            <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+               Utilization: ${(p.usage/p.capacity * 100).toFixed(1)}% (${p.usage}T / ${p.capacity}T)
+            </div>
+            ${p.accuracy ? `<div style="font-size: 0.75rem; color: var(--accent);">Segregation Accuracy: ${p.accuracy}%</div>` : ''}
+            ${p.pollution ? `<div style="font-size: 0.75rem; color: var(--danger);">Pollution Index: ${p.pollution}</div>` : ''}
+          </div>
+        `).join('');
+
+        document.getElementById('seg-container').innerHTML = renderCards(data.segregation, 'seg');
+        document.getElementById('proc-container').innerHTML = renderCards(data.processing, 'proc');
+      }
+      loadPlants();
+      setInterval(loadPlants, 5000);
+    </script>
+  </body>
+</html>

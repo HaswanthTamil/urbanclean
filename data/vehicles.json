@@ -1,52 +1,55 @@
 [
-  {
-    "id": "TN-09-CW-1022",
-    "type": "bio-degradable",
-    "capacity": 500,
-    "available": 320,
-    "status": "active",
-    "route": "Route 1",
-    "lat": 13.0622,
-    "lon": 80.2518
-  },
-  {
-    "id": "TN-10-AZ-2023",
-    "type": "recyclable",
-    "capacity": 400,
-    "available": 150,
-    "status": "active",
-    "route": "Route 4",
-    "lat": 13.0500,
-    "lon": 80.2824
-  },
-  {
-    "id": "TN-01-XX-9900",
-    "type": "hazardous",
-    "capacity": 200,
-    "available": 200,
-    "status": "idle",
-    "route": "Standby",
-    "lat": 13.0106,
-    "lon": 80.2209
-  },
-  {
-    "id": "TN-02-BM-1100",
-    "type": "e-waste",
-    "capacity": 300,
-    "available": 50,
-    "status": "returning",
-    "route": "Route 2",
-    "lat": 12.9896,
-    "lon": 80.2472
-  },
-  {
-    "id": "TN-07-PQ-5500",
-    "type": "multiple",
-    "capacity": 800,
-    "available": 600,
-    "status": "active",
-    "route": "Route 7",
-    "lat": 13.0695,
-    "lon": 80.2085
-  }
+    {
+        "id": "TN-09-CW-1022",
+        "type": "bio-degradable",
+        "capacity": 500,
+        "available": 320,
+        "status": "active",
+        "route": "Routine clear",
+        "lat": 12.9516,
+        "lon": 80.1446
+    },
+    {
+        "id": "TN-10-AZ-2023",
+        "type": "recyclable",
+        "capacity": 400,
+        "available": 150,
+        "status": "active",
+        "route": "Routine clear",
+        "lat": 12.9516,
+        "lon": 80.1446
+    },
+    {
+        "id": "TN-01-XX-9900",
+        "type": "hazardous",
+        "capacity": 200,
+        "available": 200,
+        "status": "active",
+        "route": "Routine clear",
+        "lat": 12.9516,
+        "lon": 80.1446
+    },
+    {
+        "id": "TN-02-BM-1100",
+        "type": "e-waste",
+        "capacity": 300,
+        "available": 50,
+        "status": "en-route",
+        "route": "Heading to Chromepet Residential Zone",
+        "lat": 12.955017888874718,
+        "lon": 80.1479128181498,
+        "target_lat": 12.9516,
+        "target_lon": 80.1446,
+        "target_bin_id": "BIN-24022026-11834"
+    },
+    {
+        "id": "TN-07-PQ-5500",
+        "type": "multiple",
+        "capacity": 800,
+        "available": 600,
+        "status": "active",
+        "route": "Routine clear",
+        "lat": 12.9516,
+        "lon": 80.1446
+    }
 ]

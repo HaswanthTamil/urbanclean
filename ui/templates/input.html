@@ -93,13 +93,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/fleet" class="nav-link">
               <i class="fas fa-truck"></i>
               <span>Fleet Status</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/plants" class="nav-link">
               <i class="fas fa-industry"></i>
               <span>Plants</span>
             </a>
@@ -130,6 +130,18 @@
                 <label for="bin-select">Target Bin</label>
                 <select id="bin-select" class="form-control" required>
                   <option value="" disabled selected>Loading bins...</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="waste-type">Waste Type</label>
+                <select id="waste-type" class="form-control" required>
+                  <option value="" disabled selected>Select waste type</option>
+                  <option value="bio-degradable">Bio-degradable</option>
+                  <option value="recyclable">Recyclable</option>
+                  <option value="plastic">Plastic</option>
+                  <option value="hazardous">Hazardous / Medical</option>
+                  <option value="e-waste">E-Waste</option>
                 </select>
               </div>
 
@@ -179,10 +191,11 @@
         e.preventDefault();
         
         const binId = document.getElementById('bin-select').value;
+        const type = document.getElementById('waste-type').value;
         const volume = parseFloat(document.getElementById('waste-volume').value);
         const submitBtn = e.target.querySelector('button[type="submit"]');
 
-        if (!binId || isNaN(volume)) return;
+        if (!binId || !type || isNaN(volume)) return;
 
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i> Processing...';
@@ -191,7 +204,7 @@
           const response = await fetch('/api/add-waste', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ bin_id: binId, volume: volume })
+            body: JSON.stringify({ bin_id: binId, waste_type: type, volume: volume })
           });
 
           const result = await response.json();

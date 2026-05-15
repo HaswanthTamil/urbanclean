@@ -1,152 +1,261 @@
 [
-  {
-    "id": "BIN-24022026-48211",
-    "location_id": "LOC-24022026-48291",
-    "max_capacity": 120.0,
-    "waste_type": ["medical"]
-  },
-  {
-    "id": "BIN-24022026-73922",
-    "location_id": "LOC-24022026-73915",
-    "max_capacity": 150.0,
-    "waste_type": ["medical"]
-  },
-  {
-    "id": "BIN-24022026-15877",
-    "location_id": "LOC-24022026-15842",
-    "max_capacity": 200.0,
-    "waste_type": ["recyclable", "e-waste"]
-  },
-  {
-    "id": "BIN-24022026-96481",
-    "location_id": "LOC-24022026-96427",
-    "max_capacity": 300.0,
-    "waste_type": ["recyclable", "bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-30594",
-    "location_id": "LOC-24022026-30561",
-    "max_capacity": 250.0,
-    "waste_type": ["recyclable", "bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-88799",
-    "location_id": "LOC-24022026-88734",
-    "max_capacity": 280.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-41273",
-    "location_id": "LOC-24022026-41258",
-    "max_capacity": 350.0,
-    "waste_type": ["plastic", "bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-67945",
-    "location_id": "LOC-24022026-67902",
-    "max_capacity": 320.0,
-    "waste_type": ["plastic", "bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-22311",
-    "location_id": "LOC-24022026-22394",
-    "max_capacity": 180.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-55619",
-    "location_id": "LOC-24022026-55671",
-    "max_capacity": 190.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-74129",
-    "location_id": "LOC-24022026-74183",
-    "max_capacity": 260.0,
-    "waste_type": ["recyclable", "plastic"]
-  },
-  {
-    "id": "BIN-24022026-19288",
-    "location_id": "LOC-24022026-19263",
-    "max_capacity": 175.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-86492",
-    "location_id": "LOC-24022026-86420",
-    "max_capacity": 400.0,
-    "waste_type": ["industrial", "metal"]
-  },
-  {
-    "id": "BIN-24022026-33156",
-    "location_id": "LOC-24022026-33109",
-    "max_capacity": 220.0,
-    "waste_type": ["recyclable"]
-  },
-  {
-    "id": "BIN-24022026-90588",
-    "location_id": "LOC-24022026-90544",
-    "max_capacity": 230.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-11834",
-    "location_id": "LOC-24022026-11875",
-    "max_capacity": 170.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-60274",
-    "location_id": "LOC-24022026-60231",
-    "max_capacity": 300.0,
-    "waste_type": ["bio-degradable", "plastic"]
-  },
-  {
-    "id": "BIN-24022026-44711",
-    "location_id": "LOC-24022026-44792",
-    "max_capacity": 210.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-78164",
-    "location_id": "LOC-24022026-78126",
-    "max_capacity": 240.0,
-    "waste_type": ["recyclable"]
-  },
-  {
-    "id": "BIN-24022026-25931",
-    "location_id": "LOC-24022026-25980",
-    "max_capacity": 200.0,
-    "waste_type": ["paper", "recyclable"]
-  },
-  {
-    "id": "BIN-24022026-67412",
-    "location_id": "LOC-24022026-67453",
-    "max_capacity": 180.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-39261",
-    "location_id": "LOC-24022026-39218",
-    "max_capacity": 250.0,
-    "waste_type": ["recyclable"]
-  },
-  {
-    "id": "BIN-24022026-84019",
-    "location_id": "LOC-24022026-84067",
-    "max_capacity": 190.0,
-    "waste_type": ["bio-degradable"]
-  },
-  {
-    "id": "BIN-24022026-51798",
-    "location_id": "LOC-24022026-51734",
-    "max_capacity": 220.0,
-    "waste_type": ["recyclable"]
-  },
-  {
-    "id": "BIN-24022026-96342",
-    "location_id": "LOC-24022026-96311",
-    "max_capacity": 195.0,
-    "waste_type": ["bio-degradable"]
-  }
+    {
+        "id": "BIN-24022026-48211",
+        "location_id": "LOC-24022026-48291",
+        "max_capacity": 120.0,
+        "waste_type": [
+            "medical"
+        ],
+        "current_capacity": 0.0,
+        "current_percentage": 0.0
+    },
+    {
+        "id": "BIN-24022026-73922",
+        "location_id": "LOC-24022026-73915",
+        "max_capacity": 150.0,
+        "waste_type": [
+            "medical"
+        ],
+        "current_capacity": 0.0,
+        "current_percentage": 0.0
+    },
+    {
+        "id": "BIN-24022026-15877",
+        "location_id": "LOC-24022026-15842",
+        "max_capacity": 200.0,
+        "waste_type": [
+            "recyclable",
+            "e-waste"
+        ],
+        "current_capacity": 92.0,
+        "current_percentage": 46.0
+    },
+    {
+        "id": "BIN-24022026-96481",
+        "location_id": "LOC-24022026-96427",
+        "max_capacity": 300.0,
+        "waste_type": [
+            "recyclable",
+            "bio-degradable"
+        ],
+        "current_capacity": 213.0,
+        "current_percentage": 71.0
+    },
+    {
+        "id": "BIN-24022026-30594",
+        "location_id": "LOC-24022026-30561",
+        "max_capacity": 250.0,
+        "waste_type": [
+            "recyclable",
+            "bio-degradable"
+        ],
+        "current_capacity": 175.0,
+        "current_percentage": 70.0
+    },
+    {
+        "id": "BIN-24022026-88799",
+        "location_id": "LOC-24022026-88734",
+        "max_capacity": 280.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 176.4,
+        "current_percentage": 63.0
+    },
+    {
+        "id": "BIN-24022026-41273",
+        "location_id": "LOC-24022026-41258",
+        "max_capacity": 350.0,
+        "waste_type": [
+            "plastic",
+            "bio-degradable"
+        ],
+        "current_capacity": 0.0,
+        "current_percentage": 0.0
+    },
+    {
+        "id": "BIN-24022026-67945",
+        "location_id": "LOC-24022026-67902",
+        "max_capacity": 320.0,
+        "waste_type": [
+            "plastic",
+            "bio-degradable"
+        ],
+        "current_capacity": 192.0,
+        "current_percentage": 60.0
+    },
+    {
+        "id": "BIN-24022026-22311",
+        "location_id": "LOC-24022026-22394",
+        "max_capacity": 180.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 131.4,
+        "current_percentage": 73.0
+    },
+    {
+        "id": "BIN-24022026-55619",
+        "location_id": "LOC-24022026-55671",
+        "max_capacity": 190.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 0.0,
+        "current_percentage": 0.0
+    },
+    {
+        "id": "BIN-24022026-74129",
+        "location_id": "LOC-24022026-74183",
+        "max_capacity": 260.0,
+        "waste_type": [
+            "recyclable",
+            "plastic"
+        ],
+        "current_capacity": 106.6,
+        "current_percentage": 41.0
+    },
+    {
+        "id": "BIN-24022026-19288",
+        "location_id": "LOC-24022026-19263",
+        "max_capacity": 175.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 0.0,
+        "current_percentage": 0.0
+    },
+    {
+        "id": "BIN-24022026-86492",
+        "location_id": "LOC-24022026-86420",
+        "max_capacity": 400.0,
+        "waste_type": [
+            "industrial",
+            "metal"
+        ],
+        "current_capacity": 200.0,
+        "current_percentage": 50.0
+    },
+    {
+        "id": "BIN-24022026-33156",
+        "location_id": "LOC-24022026-33109",
+        "max_capacity": 220.0,
+        "waste_type": [
+            "recyclable"
+        ],
+        "current_capacity": 0.0,
+        "current_percentage": 0.0
+    },
+    {
+        "id": "BIN-24022026-90588",
+        "location_id": "LOC-24022026-90544",
+        "max_capacity": 230.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 115.0,
+        "current_percentage": 50.0
+    },
+    {
+        "id": "BIN-24022026-11834",
+        "location_id": "LOC-24022026-11875",
+        "max_capacity": 170.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 0.0,
+        "current_percentage": 0.0
+    },
+    {
+        "id": "BIN-24022026-60274",
+        "location_id": "LOC-24022026-60231",
+        "max_capacity": 300.0,
+        "waste_type": [
+            "bio-degradable",
+            "plastic"
+        ],
+        "current_capacity": 174.0,
+        "current_percentage": 57.99999999999999
+    },
+    {
+        "id": "BIN-24022026-44711",
+        "location_id": "LOC-24022026-44792",
+        "max_capacity": 210.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 147.0,
+        "current_percentage": 70.0
+    },
+    {
+        "id": "BIN-24022026-78164",
+        "location_id": "LOC-24022026-78126",
+        "max_capacity": 240.0,
+        "waste_type": [
+            "recyclable"
+        ],
+        "current_capacity": 172.8,
+        "current_percentage": 72.00000000000001
+    },
+    {
+        "id": "BIN-24022026-25931",
+        "location_id": "LOC-24022026-25980",
+        "max_capacity": 200.0,
+        "waste_type": [
+            "paper",
+            "recyclable"
+        ],
+        "current_capacity": 96.0,
+        "current_percentage": 48.0
+    },
+    {
+        "id": "BIN-24022026-67412",
+        "location_id": "LOC-24022026-67453",
+        "max_capacity": 180.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 108.0,
+        "current_percentage": 60.0
+    },
+    {
+        "id": "BIN-24022026-39261",
+        "location_id": "LOC-24022026-39218",
+        "max_capacity": 250.0,
+        "waste_type": [
+            "recyclable"
+        ],
+        "current_capacity": 140.0,
+        "current_percentage": 56.00000000000001
+    },
+    {
+        "id": "BIN-24022026-84019",
+        "location_id": "LOC-24022026-84067",
+        "max_capacity": 190.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 83.6,
+        "current_percentage": 43.99999999999999
+    },
+    {
+        "id": "BIN-24022026-51798",
+        "location_id": "LOC-24022026-51734",
+        "max_capacity": 220.0,
+        "waste_type": [
+            "recyclable"
+        ],
+        "current_capacity": 101.2,
+        "current_percentage": 46.0
+    },
+    {
+        "id": "BIN-24022026-96342",
+        "location_id": "LOC-24022026-96311",
+        "max_capacity": 195.0,
+        "waste_type": [
+            "bio-degradable"
+        ],
+        "current_capacity": 97.5,
+        "current_percentage": 50.0
+    }
 ]

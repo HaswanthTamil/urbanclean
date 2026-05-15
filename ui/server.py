@@ -103,6 +103,14 @@ def map_view():
 def dashboard_view():
     return render_template('dashboard.html')
 
+@app.route('/fleet')
+def fleet_view():
+    return render_template('fleet.html')
+
+@app.route('/plants')
+def plants_view():
+    return render_template('plants.html')
+
 @app.route('/input')
 def input_view():
     return render_template('input.html')
@@ -215,33 +223,72 @@ def vehicles_stats():
                            
     assigned_bins = set()
     for v in vehicles:
-        if not high_priority:
-            break
+        if v.get('status') == 'en-route' and 'target_lat' in v and 'target_lon' in v:
+            # Move visually (smooth 10% per tick)
+            v_lat = v.get('lat', 13.0)
+            v_lon = v.get('lon', 80.2)
+            dist_lat = v['target_lat'] - v_lat
+            dist_lon = v['target_lon'] - v_lon
             
-        best_b = None
-        best_score = float('inf')
-        
-        for b in high_priority:
-            if b['id'] in assigned_bins:
-                continue
-            loc = locations.get(b['location_id'])
-            if not loc: continue
+            # Step size mapping based loosely on earth diff limits
+            v['lat'] = v_lat + (dist_lat * 0.1)
+            v['lon'] = v_lon + (dist_lon * 0.1)
             
-            dist = haversine_distance(v.get('lat', 13.0), v.get('lon', 80.2), loc['lat'], loc['lon'])
-            # Score balances distance with urgency. Smaller score is better.
-            urgency_discount = (b['current_percentage'] / 100.0) 
-            score = dist / urgency_discount
-            
-            if score < best_score:
-                best_score = score
-                best_b = b
+            # Reached destination handling (roughly < ~100m)
+            dist_abs = (dist_lat**2 + dist_lon**2)**0.5
+            if dist_abs < 0.0015:
+                v['status'] = 'active'
+                v['lat'] = v['target_lat']
+                v['lon'] = v['target_lon']
+                v['route'] = 'Routine clear'
                 
-        if best_b:
-            loc = locations.get(best_b['location_id'], {})
-            v['route'] = f"Heading to {loc.get('name', 'Priority Bin')}"
-            v['status'] = 'en-route'
-            assigned_bins.add(best_b['id'])
+                # Empty the specific critical bin!
+                target_bin_id = v.get('target_bin_id')
+                if target_bin_id:
+                    for b in bins:
+                        if b['id'] == target_bin_id:
+                            b['current_capacity'] = 0.0
+                            b['current_percentage'] = 0.0
+                            break
+                    save_json(bins_path, bins)
+                
+                # Cleanup internal target refs
+                v.pop('target_lat', None)
+                v.pop('target_lon', None)
+                v.pop('target_bin_id', None)
+                
+        elif not high_priority:
+            continue
             
+        else:
+            best_b = None
+            best_score = float('inf')
+            
+            for b in high_priority:
+                if b['id'] in assigned_bins:
+                    continue
+                loc = locations.get(b['location_id'])
+                if not loc: continue
+                
+                dist = haversine_distance(v.get('lat', 13.0), v.get('lon', 80.2), loc['lat'], loc['lon'])
+                urgency_discount = (b['current_percentage'] / 100.0) 
+                score = dist / urgency_discount
+                
+                if score < best_score:
+                    best_score = score
+                    best_b = b
+                    
+            if best_b:
+                loc = locations.get(best_b['location_id'], {})
+                v['route'] = f"Heading to {loc.get('name', 'Priority Bin')}"
+                v['status'] = 'en-route'
+                v['target_lat'] = loc['lat']
+                v['target_lon'] = loc['lon']
+                v['target_bin_id'] = best_b['id']
+                assigned_bins.add(best_b['id'])
+                
+    # Save physical movement to file so it's stateful across requests
+    save_json(vehicles_path, vehicles)
     return jsonify(vehicles)
 
 @app.route('/api/plants-stats')
