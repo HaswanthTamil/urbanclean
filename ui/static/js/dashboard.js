@@ -124,9 +124,9 @@ function rerouteTrucks() {
     fetchStats();
 }
 
-function raisePenalty() {
-    const plantId = "PLANT-" + Math.floor(Math.random() * 9000 + 1000);
-    addLog(`WARNING: Environmental violation detected at ${plantId}. Penalty issued: ₹25,000.`);
+function requestEmergency() {
+    const binId = "BIN-" + Math.floor(Math.random() * 90000 + 10000);
+    addLog(`URGENT: Emergency clearance requested for zone near ${binId}. Prioritizing dispatch...`);
 }
 
 function addLog(msg) {

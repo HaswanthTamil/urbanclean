@@ -1,15 +1,14 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import os
 import sys
 
 # Add the project root to the path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from utils.storage import load_json
+from utils.storage import load_json, save_json
 from utils.geo import haversine_distance
 from core.models.mapgraph import MapGraph
 from config.settings import ROAD_CLUSTERING_FACTOR
-
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -104,6 +103,10 @@ def map_view():
 def dashboard_view():
     return render_template('dashboard.html')
 
+@app.route('/input')
+def input_view():
+    return render_template('input.html')
+
 @app.route('/api/map-data')
 def map_data():
     if map_graph is None:
@@ -146,41 +149,110 @@ def map_data():
 def bins_stats():
     bins_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'raw_bins.json')
     bins = load_json(bins_path)
-    # Simulate current capacity if not present
+    
+    modified = False
     for b in bins:
         if 'current_capacity' not in b:
-            b['current_percentage'] = 40 + (hash(b['id']) % 50) # Random but consistent for the session
-        else:
-            b['current_percentage'] = (b['current_capacity'] / b['max_capacity']) * 100
+            # Initialize with default value for presentation purposes
+            b['current_capacity'] = (40 + (hash(b['id']) % 50)) * b['max_capacity'] / 100.0
+            modified = True
+            
+        b['current_percentage'] = min(100, (b['current_capacity'] / b['max_capacity']) * 100)
+    
+    if modified:
+        save_json(bins_path, bins)
+        
     return jsonify(bins)
+
+@app.route('/api/add-waste', methods=['POST'])
+def add_waste():
+    data = request.json
+    bin_id = data.get('bin_id')
+    volume = float(data.get('volume', 0))
+    
+    if not bin_id or volume <= 0:
+        return jsonify({'success': False, 'error': 'Invalid bin ID or volume'}), 400
+
+    bins_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'raw_bins.json')
+    bins = load_json(bins_path)
+    
+    found = False
+    for b in bins:
+        if b['id'] == bin_id:
+            if 'current_capacity' not in b:
+                b['current_capacity'] = (40 + (hash(b['id']) % 50)) * b['max_capacity'] / 100.0
+            b['current_capacity'] += volume
+            b['current_percentage'] = min(100, (b['current_capacity'] / b['max_capacity']) * 100)
+            found = True
+            break
+            
+    if found:
+        save_json(bins_path, bins)
+        return jsonify({'success': True, 'message': f'Added {volume}kg to {bin_id}'})
+    else:
+        return jsonify({'success': False, 'error': 'Bin not found'}), 404
 
 @app.route('/api/vehicles-stats')
 def vehicles_stats():
-    # Since vehicles.json is empty in the current state, we'll return some mock data
-    # that follows the logic of the project
-    mock_vehicles = [
-        {"id": "TRUCK-001", "type": "bio-degradable", "capacity": 500, "available": 320, "status": "active", "route": "Route 1"},
-        {"id": "TRUCK-002", "type": "recyclable", "capacity": 400, "available": 150, "status": "active", "route": "Route 4"},
-        {"id": "TRUCK-003", "type": "hazardous", "capacity": 200, "available": 200, "status": "idle", "route": "Standby"},
-        {"id": "TRUCK-004", "type": "e-waste", "capacity": 300, "available": 50, "status": "returning", "route": "Route 2"}
-    ]
-    return jsonify(mock_vehicles)
+    vehicles_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'vehicles.json')
+    vehicles = load_json(vehicles_path)
+    
+    # Dynamic routing for high priority bins
+    bins_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'raw_bins.json')
+    bins = load_json(bins_path)
+    
+    locations_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'locations.json')
+    locations = {loc['id']: loc for loc in load_json(locations_path)}
+
+    for b in bins:
+        if 'current_capacity' not in b:
+            b['current_capacity'] = (40 + (hash(b['id']) % 50)) * b['max_capacity'] / 100.0
+        b['current_percentage'] = min(100, (b['current_capacity'] / b['max_capacity']) * 100)
+    
+    # High priority bins (capacity > 75%)
+    high_priority = sorted([b for b in bins if b['current_percentage'] > 75], 
+                           key=lambda x: x['current_percentage'], reverse=True)
+                           
+    assigned_bins = set()
+    for v in vehicles:
+        if not high_priority:
+            break
+            
+        best_b = None
+        best_score = float('inf')
+        
+        for b in high_priority:
+            if b['id'] in assigned_bins:
+                continue
+            loc = locations.get(b['location_id'])
+            if not loc: continue
+            
+            dist = haversine_distance(v.get('lat', 13.0), v.get('lon', 80.2), loc['lat'], loc['lon'])
+            # Score balances distance with urgency. Smaller score is better.
+            urgency_discount = (b['current_percentage'] / 100.0) 
+            score = dist / urgency_discount
+            
+            if score < best_score:
+                best_score = score
+                best_b = b
+                
+        if best_b:
+            loc = locations.get(best_b['location_id'], {})
+            v['route'] = f"Heading to {loc.get('name', 'Priority Bin')}"
+            v['status'] = 'en-route'
+            assigned_bins.add(best_b['id'])
+            
+    return jsonify(vehicles)
 
 @app.route('/api/plants-stats')
 def plants_stats():
-    # plants/processing_plants.json and segregation_plants.json are also empty
-    mock_plants = {
-        "segregation": [
-            {"id": "SEG-01", "name": "North Segregation Plant", "capacity": 2000, "usage": 1450, "accuracy": 94, "status": "working"},
-            {"id": "SEG-02", "name": "South Segregation Plant", "capacity": 1500, "usage": 1200, "accuracy": 91, "status": "working"}
-        ],
-        "processing": [
-            {"id": "PROC-BIO-01", "type": "composting", "capacity": 500, "usage": 420, "pollution": 0.02, "status": "working"},
-            {"id": "PROC-REC-01", "type": "recycling", "capacity": 800, "usage": 550, "pollution": 0.05, "status": "working"},
-            {"id": "PROC-HAZ-01", "type": "hazardous", "capacity": 100, "usage": 20, "pollution": 0.12, "status": "maintenance"}
-        ]
-    }
-    return jsonify(mock_plants)
+    seg_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'plants', 'segregation_plants.json')
+    proc_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'plants', 'processing_plants.json')
+    
+    return jsonify({
+        "segregation": load_json(seg_path),
+        "processing": load_json(proc_path)
+    })
 
 if __name__ == '__main__':
     generate_map()

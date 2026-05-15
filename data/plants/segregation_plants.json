@@ -1,0 +1,32 @@
+[
+  {
+    "id": "SEG-01",
+    "name": "Guindy Segregation Hub",
+    "capacity": 2000,
+    "usage": 1450,
+    "accuracy": 94,
+    "status": "working",
+    "lat": 13.0076,
+    "lon": 80.2119
+  },
+  {
+    "id": "SEG-02",
+    "name": "Perungudi Transfer Station",
+    "capacity": 2500,
+    "usage": 1200,
+    "accuracy": 91,
+    "status": "working",
+    "lat": 12.9665,
+    "lon": 80.2456
+  },
+  {
+    "id": "SEG-03",
+    "name": "Kodungaiyur Segregation Plant",
+    "capacity": 3000,
+    "usage": 2800,
+    "accuracy": 88,
+    "status": "working",
+    "lat": 13.1365,
+    "lon": 80.2541
+  }
+]

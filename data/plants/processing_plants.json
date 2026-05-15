@@ -1,0 +1,46 @@
+[
+  {
+    "id": "PROC-BIO-01",
+    "name": "Koyambedu Bio-Gas Facility",
+    "type": "composting",
+    "capacity": 500,
+    "usage": 420,
+    "pollution": 0.02,
+    "status": "working",
+    "lat": 13.0690,
+    "lon": 80.2080
+  },
+  {
+    "id": "PROC-REC-01",
+    "name": "Adyar Recycling Center",
+    "type": "recycling",
+    "capacity": 800,
+    "usage": 550,
+    "pollution": 0.05,
+    "status": "working",
+    "lat": 13.0067,
+    "lon": 80.2570
+  },
+  {
+    "id": "PROC-HAZ-01",
+    "name": "Manali Hazardous Waste Management",
+    "type": "hazardous",
+    "capacity": 100,
+    "usage": 20,
+    "pollution": 0.12,
+    "status": "maintenance",
+    "lat": 13.1670,
+    "lon": 80.2660
+  },
+  {
+    "id": "PROC-DUMP-01",
+    "name": "Perungudi Dumpyard",
+    "type": "dumping",
+    "capacity": 10000,
+    "usage": 8500,
+    "pollution": 0.85,
+    "status": "working",
+    "lat": 12.9655,
+    "lon": 80.2456
+  }
+]

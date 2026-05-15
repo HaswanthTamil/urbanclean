@@ -33,6 +33,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/input" class="nav-link">
+              <i class="fas fa-plus-circle"></i>
+              <span>Add Waste</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-truck"></i>
               <span>Fleet Status</span>
@@ -164,7 +170,7 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                     <button class="control-btn" onclick="simulateCheckup()">Mark for Checkup</button>
                     <button class="control-btn secondary" onclick="rerouteTrucks()">Dispatch Extra Truck</button>
-                    <button class="control-btn secondary" style="grid-column: span 2; border-color: var(--danger); color: var(--danger);" onclick="raisePenalty()">Raise Environmental Penalty</button>
+                    <button class="control-btn secondary" style="grid-column: span 2; border-color: var(--warning); color: var(--warning);" onclick="requestEmergency()">Request Emergency Clearance</button>
                 </div>
             </div>
             <div class="glass-card">
