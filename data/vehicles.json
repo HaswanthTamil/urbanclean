@@ -34,13 +34,10 @@
         "type": "e-waste",
         "capacity": 300,
         "available": 50,
-        "status": "en-route",
-        "route": "Heading to Chromepet Residential Zone",
-        "lat": 12.955017888874718,
-        "lon": 80.1479128181498,
-        "target_lat": 12.9516,
-        "target_lon": 80.1446,
-        "target_bin_id": "BIN-24022026-11834"
+        "status": "active",
+        "route": "Routine clear",
+        "lat": 12.9516,
+        "lon": 80.1446
     },
     {
         "id": "TN-07-PQ-5500",
